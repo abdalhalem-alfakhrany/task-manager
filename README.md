@@ -1,6 +1,13 @@
 # task-manager
 this a laravel api project for a tasks management system build as task for job application
 
+if you have docker and docker-compose on you system you can just run 
+```sh
+docker-compose up --build
+```
+and wait till it build the two images after that you can test it by open the postman collection ([Task Manager.postman_collection.json](https://raw.githubusercontent.com/abdalhalem-alfakhrany/task-manager/refs/heads/master/Task%20Manager.postman_collection.json))
+ and all endpoints will be running
+
 first make sure that php-8.3 and the common extensions are installed on you system
 then make sure that composer latest version is installed 
 
@@ -42,6 +49,13 @@ now we can run this command to run couple of tests in the app
 ```sh
 php artisan test
 ```
+
+now you can run app with php integrate server with this command
+```sh
+php artisan serve --port=8080
+```
+
+in this case make sure that the APP_URL you use in .env file is  http://127.0.0.1:8080 if you just lit it like .env.example it will work fine else you want another url you need to change the variable api_base_url in post man environment file 
 
 to test the api endpoints i attached a postman collection you can download it and load from post man on your machine ([Task Manager.postman_collection.json](https://raw.githubusercontent.com/abdalhalem-alfakhrany/task-manager/refs/heads/master/Task%20Manager.postman_collection.json))
 
