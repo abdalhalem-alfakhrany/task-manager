@@ -11,15 +11,11 @@ class SessionController extends Controller
 {
     public function create(LoginRequest $request)
     {
-        if (Auth::attempt($request->only(['email', 'password']))) {
+        if (Auth::guard('web')->attempt($request->only(['email', 'password']))) {
             $user = Auth::user();
-            $token = $user->createToken($request->device_name ?? 'default_token', [
-                'create-task',
-                'update-task',
-                'read-task',
-                'delete-task'
-            ])->plainTextToken;
+            $token = $user->createToken($request->device_name ?? 'default_token')->plainTextToken;
 
+            logger($user->can('create-task'));
             return new JsonResponse([
                 'success' => true,
                 'data' => [
@@ -29,7 +25,7 @@ class SessionController extends Controller
         } else {
             return new JsonResponse([
                 'success' => false,
-                'message' => 'this user is not int our db'
+                'message' => 'this user is not in our db'
             ]);
         }
     }
