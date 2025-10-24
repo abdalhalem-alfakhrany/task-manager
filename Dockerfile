@@ -22,10 +22,6 @@ RUN rm -f database/database.sqlite
 RUN touch database/database.sqlite
 RUN php artisan migrate --seed
 
-# Set permissions
-# RUN chown -R $USER:www-data /var/www/html/storage /var/www/html/database /var/www/html/bootstrap/cache
-# RUN chmod -R 777 /var/www/html/storage /var/www/html/database /var/www/html/bootstrap/cache
-
 # Expose port
 EXPOSE 9000
 
