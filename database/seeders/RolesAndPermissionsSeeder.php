@@ -16,17 +16,16 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         $createTask = Permission::create(['name' => 'create-task']);
         $updateTask = Permission::create(['name' => 'update-task']);
-        $readTask = Permission::create(['name' => 'read-task']);
+        $updateAnyTask = Permission::create(['name' => 'update-any-task']);
+        $showTask = Permission::create(['name' => 'show-task']);
+        $showAnyTask = Permission::create(['name' => 'show-any-task']);
+        $listTasks = Permission::create(['name' => 'list-tasks']);
 
-        $assignTask = Permission::create(['name' => 'assign-task']);
 
+        $managerRole = Role::create(['name' => 'manager']);
+        $managerRole->givePermissionTo([$createTask, $updateAnyTask, $showAnyTask, $listTasks,]);
 
-        Role::create(['name' => 'manager'])
-            ->permissions()
-            ->attach([$createTask->id, $updateTask->id, $readTask->id, $assignTask->id]);
-
-        Role::create(['name' => 'user'])
-            ->permissions()
-            ->attach([$updateTask->id, $readTask->id]);
+        $userRole = Role::create(['name' => 'user']);
+        $userRole->givePermissionTo([$updateTask, $showTask]);
     }
 }
